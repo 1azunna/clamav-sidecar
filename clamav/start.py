@@ -7,8 +7,8 @@ import os
 # os.system("fcrontab -u root /root.crontab")
 # os.system("rm /root.crontab")
 
-# # Bootstrap the database if clamav is running for the first time
-# os.system("[ -f /data/main.cvd ] || freshclam")
+# Bootstrap the database if clamav is running for the first time
+os.system("[ -f /data/main.cvd ] || freshclam")
 
 # Run the update daemon
 # os.system("freshclam -d -c 6")

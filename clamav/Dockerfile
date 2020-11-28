@@ -16,6 +16,4 @@ COPY health.sh /health.sh
 COPY scan.sh /scan.sh
 RUN chmod +x /health.sh /scan.sh
 
-EXPOSE 3310
-
 CMD /start.py
