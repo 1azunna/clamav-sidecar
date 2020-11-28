@@ -1,0 +1,28 @@
+version: '3.8'
+services: 
+  infected_container:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: infected_container
+    volumes: 
+      - scandir:/root:ro
+  
+  clamav:
+    build:
+      dockerfile: Dockerfile
+      context: clamav/
+    container_name: clamav
+    volumes: 
+      - scandir:/host-fs:ro
+      - scandata:/logs
+    healthcheck:
+      test: ["CMD", "/health.sh"]
+      retries: 3
+      start_period: 40s
+
+volumes:
+  scandir:
+    driver: local
+  scandata:
+    driver: local
