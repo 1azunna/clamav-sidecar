@@ -13,8 +13,6 @@ else
     --stdout \
     --log=/logs/clamscan.log \
     --recursive \
-    --exclude=/host-fs/dev \
-    --exclude=/host-fs/sys \
     /host-fs
   rm $LOCK
 fi

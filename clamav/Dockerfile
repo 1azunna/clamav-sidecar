@@ -1,5 +1,5 @@
 FROM alpine:3.12.1
-LABEL maintainer "Azunna Ikonne <ikonnea@gmail.com>"
+LABEL maintainer="Azunna Ikonne <ikonnea@gmail.com>"
 
 RUN apk add --no-cache \
     python3 py3-pip \
@@ -10,10 +10,13 @@ RUN mkdir -p /logs /data
 RUN echo `date`: File created >> /logs/clamscan.log
 RUN chmod +r /etc/fcron/*
 
+# Download Daiy cvd
+RUN wget -q https://database.clamav.net/daily.cvd
+RUN mv daily.cvd /data
+
 COPY conf /etc/clamav
-COPY start.py /start.py
 COPY health.sh /health.sh
 COPY scan.sh /scan.sh
 RUN chmod +x /health.sh /scan.sh
 
-CMD /start.py
+CMD [ "/bin/sh", "scan.sh" ]
